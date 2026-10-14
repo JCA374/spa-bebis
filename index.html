@@ -1,0 +1,567 @@
+<title>Varmt vatten för bebis</title>
+<meta name="description" content="Spa, hotellrum med bubbelbad och stugor med bubbelpool i Dalarna, Gästrikland och kring Stockholm, jämförda på pris och bebisvänlighet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#F1F5F4; --surface:#FFFFFF; --sunk:#E7EEEC; --ink:#132B29; --muted:#56706C; --line:#D5E0DD; --line-strong:#B9CBC7;
+  --accent:#0B6F6C; --accent-ink:#FFFFFF; --accent-soft:#D6ECE9;
+  --ok:#1D7A3D; --ok-soft:#DCF0E2; --maybe:#8A6200; --maybe-soft:#F7ECC6; --no:#A3342B; --no-soft:#F6DEDA; --off:#8BA19D;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0D1817; --surface:#142220; --sunk:#1A2C2A; --ink:#E1ECEA; --muted:#93AAA6; --line:#263B38; --line-strong:#35504C;
+    --accent:#52C2B6; --accent-ink:#0D1817; --accent-soft:#173A37;
+    --ok:#6FD08F; --ok-soft:#173826; --maybe:#E6C25A; --maybe-soft:#3A3014; --no:#F08A80; --no-soft:#3F1E1B; --off:#5E7672;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1817; --surface:#142220; --sunk:#1A2C2A; --ink:#E1ECEA; --muted:#93AAA6; --line:#263B38; --line-strong:#35504C;
+  --accent:#52C2B6; --accent-ink:#0D1817; --accent-soft:#173A37;
+  --ok:#6FD08F; --ok-soft:#173826; --maybe:#E6C25A; --maybe-soft:#3A3014; --no:#F08A80; --no-soft:#3F1E1B; --off:#5E7672;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2rem,5.5vw,3rem);letter-spacing:-.02em}
+h2{font-size:1.45rem}
+h3{font-size:1.05rem;font-family:var(--body);font-weight:700;line-height:1.25}
+p{margin:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font:600 .75rem/1 var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+
+header{display:flex;flex-direction:column;gap:12px}
+.lede{max-width:66ch;font-size:1.06rem;color:var(--muted)}
+.lede b{color:var(--ink);font-weight:600}
+
+/* Top picks */
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pick{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit}
+.pick:hover{border-color:var(--line-strong)}
+.pick .why{font-size:.92rem;color:var(--muted)}
+.pick .p{font:600 1.25rem/1.1 var(--mono);margin-top:auto;padding-top:6px}
+.pick .p small{font:400 .78rem/1 var(--body);color:var(--muted);margin-left:4px}
+
+/* Controls */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;border-bottom:1px solid var(--line)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden}
+.seg button{font:600 .88rem/1 var(--body);padding:9px 12px;border:0;background:var(--surface);color:var(--ink);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line-strong)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.toggle{display:inline-flex;align-items:center;gap:7px;font-size:.92rem;cursor:pointer;user-select:none}
+.toggle input{width:17px;height:17px;accent-color:var(--accent);margin:0}
+select{font:600 .88rem/1 var(--body);padding:8px 10px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink)}
+.regions{width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.regions #regions{display:contents}
+.rchip{font:600 .85rem/1 var(--body);padding:7px 11px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+.rchip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.rchip .n{font-family:var(--mono);font-weight:500;opacity:.7;margin-left:4px}
+.count{margin-left:auto;font-size:.88rem;color:var(--muted)}
+
+/* List */
+.list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.colhead{display:grid;grid-template-columns:minmax(0,1fr) 300px 150px;gap:16px;padding:10px 18px;background:var(--sunk);font:600 .72rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.colhead span:last-child{text-align:right}
+details.row{border-top:1px solid var(--line)}
+details.row:first-of-type{border-top:0}
+details.row>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 300px 150px;gap:16px;align-items:center;padding:14px 18px}
+details.row>summary::-webkit-details-marker{display:none}
+details.row>summary:hover{background:color-mix(in srgb,var(--sunk) 55%,transparent)}
+details.row[open]>summary{background:var(--sunk)}
+.name{display:flex;flex-direction:column;gap:3px;min-width:0}
+.rate{display:inline-block;font:600 .8rem/1 var(--mono);color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:4px 6px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.rate small{font:600 .68rem/1 var(--body);color:var(--muted);margin-left:2px}
+.focus{width:100%;font-size:.93rem}
+.focus td.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+.focus th.num{text-align:right}
+.focus td small{display:block;color:var(--muted);font:400 .8rem/1.3 var(--body);margin-top:2px}
+.name .sub{font-size:.88rem;color:var(--muted)}
+.name .tag{display:inline-block;font:600 .7rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);border-radius:4px;padding:3px 5px;margin-right:6px;vertical-align:1px}
+.feats{display:flex;flex-wrap:wrap;gap:6px}
+.f{display:inline-flex;align-items:center;gap:6px;font:600 .8rem/1 var(--body);padding:6px 8px;border-radius:6px;white-space:nowrap}
+.f::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.f.ok{background:var(--ok-soft);color:var(--ok)}
+.f.maybe{background:var(--maybe-soft);color:var(--maybe)}
+.f.no{background:var(--no-soft);color:var(--no)}
+.f.off{background:transparent;color:var(--off);border:1px dashed var(--line-strong)}
+.price{text-align:right;display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+.price .v{font:600 1.15rem/1.1 var(--mono);white-space:nowrap}
+.price .u{font-size:.76rem;color:var(--muted);line-height:1.25}
+.price.over .v{color:var(--no)}
+.price.unknown .v{color:var(--muted);font-size:.95rem}
+.detail{padding:4px 18px 20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px 32px;background:var(--sunk)}
+.detail .note{grid-column:1/-1;font-size:.98rem;max-width:80ch}
+dl{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 14px;font-size:.93rem;align-content:start}
+dt{color:var(--muted);font-weight:600}
+dd{margin:0}
+.pools{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+.pools ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.pools li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted var(--line-strong);padding-bottom:3px}
+.pools li .t{font-family:var(--mono)}
+.pools li.hot .t{color:var(--ok);font-weight:600}
+.src{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.88rem}
+.src span{color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+
+/* Secondary */
+section{display:flex;flex-direction:column;gap:12px}
+.intro{max-width:70ch;color:var(--muted)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:600px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.box ol,.box ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
+footer{font-size:.86rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:4px}
+
+@media (max-width:820px){
+  .colhead{display:none}
+  details.row>summary{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name price" "feats feats";gap:10px 14px}
+  .name{grid-area:name}.feats{grid-area:feats}.price{grid-area:price}
+  .detail{grid-template-columns:minmax(0,1fr)}
+  .count{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:no-preference){details.row>summary{transition:background .12s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Spa-research · 2 vuxna + bebis 9 mån</span>
+    <h1>Varmt vatten för bebis</h1>
+    <p class="lede">Hotell med spa, rum med <b>eget bubbelbad</b> och stugor med <b>egen bubbelpool</b> mellan Stockholm, Gästrikland och Dalarna. Priset är <b>per natt för två vuxna</b>. Bebisar bor nästan alltid gratis. Klicka på en rad för barnregler, pooltemperaturer och källor.</p>
+  </header>
+
+  <section>
+    <span class="eyebrow">Bästa förslagen hittills</span>
+    <div class="picks" id="picks"></div>
+  </section>
+
+  <section>
+    <h2>Tällberg och Rättvik</h2>
+    <p class="intro">Ställena med bubbelbad på rummet eller i stugan, jämförda på pris, mat och betyg. Priserna är per natt för två vuxna. "Med middag" betyder hotellets paket med 3-rättersmiddag och frukost.</p>
+    <div class="tablewrap"><table class="focus">
+      <thead><tr><th>Ställe</th><th class="num">Rum med frukost / stuga</th><th class="num">Med middag</th><th>Betyg</th><th>Bebis i spa</th></tr></thead>
+      <tbody id="focus"></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Jämför</h2>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Typ av boende">
+        <button id="t-all" aria-pressed="true">Alla</button>
+        <button id="t-hotel" aria-pressed="false">Hotell &amp; spa</button>
+        <button id="t-cabin" aria-pressed="false">Stugor</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="f-tub"> Bubbelbad på rummet eller i stugan</label>
+      <label class="toggle"><input type="checkbox" id="f-warm"> Spa-pool 33–37 °C bekräftad</label>
+      <label class="toggle"><input type="checkbox" id="f-budget"> Max 4 500 kr/natt</label>
+      <select id="sort" aria-label="Sortering">
+        <option value="match">Sortera: bäst för bebis</option>
+        <option value="price">Sortera: pris, lägst först</option>
+        <option value="drive">Sortera: restid från Stockholm</option>
+      </select>
+      <span class="count" id="count"></span>
+      <div class="regions" role="group" aria-label="Region">
+        <span class="eyebrow">Region</span>
+        <span id="regions"></span>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section>
+    <h2>Bortsorterat</h2>
+    <p class="intro">De här ställena sorterades bort på grund av åldersgräns, pris över 4 500 kr/natt eller att boendet är för stort för två vuxna och en bebis.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Ställe</th><th>Ort</th><th>Varför bortsorterat</th><th>Källa</th></tr></thead>
+        <tbody id="excluded"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bra att veta</h2>
+    <div class="cols">
+      <div class="box">
+        <h3>Vatten och bebis</h3>
+        <ul>
+          <li>Babysim hålls i 33–34 °C. Barn under 2 år bör inte bada längre än 30 minuter åt gången (<a href="https://www.kalix.se/Uppleva/SportCity/Bad/Babysim-och-minisim/Forberedelser-infor-babysim/" target="_blank" rel="noopener">Kalix SportCity</a>).</li>
+          <li>Jacuzzis och badtunnor håller ofta 38–40 °C, vilket är varmare än babysim. Fråga om temperaturen går att sänka.</li>
+          <li>Vedeldade badtunnor är svåra att hålla på en jämn temperatur. En elvärmd jacuzzi eller ett bubbelbadkar inomhus är lättare att styra.</li>
+          <li>Badhus kräver normalt tättsittande badblöja (<a href="https://kommun.varnamo.se/miniwebbar/varnamo-simhall/simhall/simundervisning/babysim.html" target="_blank" rel="noopener">Värnamo simhall</a>). Vissa spa kräver tvärtom att barnet är blöjfritt (<a href="https://www.svenskaspahotell.se/om-oss/barnvanligt-pa-spa/" target="_blank" rel="noopener">Svenska Spahotell</a>).</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Fråga när ni ringer</h3>
+        <ol>
+          <li>Får en 9 månaders bebis vara i poolerna, och vilka tider?</li>
+          <li>Vilken temperatur har den varmaste poolen?</li>
+          <li>Är badblöja tillåten?</li>
+          <li>Får en spjälsäng plats i rummet med bubbelbad, och vad kostar den?</li>
+          <li>Vad kostar det med bebis 0–1 år? Oftast är det gratis.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Senast uppdaterad <span class="mono" id="updated"></span>. För hotellrum med bubbelbad gäller priset den rumstypen, kontrollerat per rumstyp på Hotelspecials. Övriga priser är ungefärliga och kommer från hotellens egna sidor, bokningssajter eller Airbnb-sökningar för helger i nov 2026–jan 2027. De varierar med datum.</span>
+    <span>Restid är ungefärlig bilresa från Stockholm. Regler och temperaturer ändras, så dubbelkolla innan ni bokar.</span>
+  </footer>
+</div>
+
+<script>
+/* ===== DATA: lägg till eller ändra här =====
+   kind: "hotel" | "cabin"
+   baby: "ja" | "oklart" | "nej"      får bebisen vara i spa/pool
+   warm: "ja" | "okänd" | "nej" | null  spa-pool 33–37 °C (null = inget spa)
+   tub:  "ja" | "okänd" | "nej"       eget bubbelbad på rummet / i stugan
+   price: {min, max, unit}  kr per natt för två vuxna; min null = okänt
+   drive: minuter med bil från Stockholm
+*/
+const UPDATED = "2026-10-13";
+const BUDGET = 4500;
+
+const ITEMS = [
+  {id:"satra", kind:"hotel", name:"Sätra Brunn", place:"Sala", region:"Västmanland", drive:105, score:96,
+   baby:"ja", warm:"ja", tub:"okänd",
+   price:{min:3790, max:4190, unit:"spapaket inkl. middag, frukost och spa"},
+   pick:"34 °C i poolen, närmast Stockholm. Bebis 0–1 år gratis.",
+   pools:[["Stor pool",34],["Bubbelpool",null]],
+   rules:"Barn under 13 år: ons 15–17, tors–fre 9–11 och 15–17, lör 9–11 och 13–15, sön 9–11.",
+   diaper:"Okänd", rooms:"Okänt om något rum har bubbelbad.",
+   priceNote:"Vardagsspa 1 natt 1 895 kr/pers, Spaweekend 1 natt 2 095 kr/pers. Barn 0–1 år gratis i föräldrarnas säng.",
+   contact:"0224-546 00",
+   note:"34 °C är exakt babysimtemperatur. Spa och reception har öppet onsdag till söndag.",
+   sources:[["Spa (34 °C)","https://satrabrunn.se/spa/"],["Barntider","https://satrabrunn.se/boendepaket/gastinformation/"],["Vardagsspa","https://satrabrunn.se/boendepaket/vardagsspa/"],["Spaweekend","https://satrabrunn.se/boendepaket/spaweekend-2/"]]},
+
+  {id:"orbaden", kind:"hotel", name:"Orbaden Spa & Resort", place:"Vallsta, Bollnäs", region:"Hälsingland", drive:195, score:94,
+   baby:"ja", warm:"ja", tub:"okänd",
+   price:{min:5270, max:6240, unit:"paket inkl. middag, frukost och spa"},
+   pick:"Två pooler i bebisfönstret: 37 °C och 35 °C.",
+   pools:[["Mineralpool",37],["Utepooler",35],["Swimmingpool",27],["Utomhusjacuzzi",null]],
+   rules:"Barn under 13 år: mån 15–17, tis–lör 10–12 och 15–17, sön 10–12. Längre tider på höstlovet.",
+   diaper:"Okänd", rooms:"10 temasviter. Okänt om någon har bubbelbad.",
+   priceNote:"Billigaste paketet med övernattning är \"Vi firar\" för 2 635 kr/pers. Spapaket med behandling kostar 3 120 kr/pers. Pris för enbart logi anges inte. Höstlovet v.44: 10–30 % rabatt från 2 nätter.",
+   contact:"0278-62 15 00",
+   note:"Bäst temperaturer av alla, men dyrast. Paketen inkluderar 4-rättersmiddag, så det rena logipriset är lägre. Ligger strax norr om Gästrikland.",
+   sources:[["Temperaturer och barntider","https://orbaden.se/vanliga-fragor/"],["Spapaket","https://orbaden.se/paketpriser/spapaket/"],["Vi firar-paketet","https://orbaden.se/paketpriser/vi-firar-paketet/"]]},
+
+  {id:"tallbergsgarden", rating:{v:"8,9",n:"530 omdömen",src:"Booking"}, rating2:"Hotelspecials 8,8 (frukost 9,7, middag 8,9)", food:"Frukost ingår. Halvpension med 3-rättersmiddag från à la carte-menyn och frukost: minisvit med bubbelbad 1 775 kr/person, svit med bubbelbad 1 975 kr/person, alltså 3 550 eller 3 950 kr för två. Restaurangen Johanssons finns med i White Guide.", halfboard:3550, hbNote:"minisvit med bubbelbad", kind:"hotel", name:"Tällbergsgården", place:"Tällberg", region:"Dalarna", drive:180, score:90,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:1526, max:2095, unit:"minisvit/svit med bubbelbad, frukost ingår"},
+   pick:"Minisvit med bubbelbadkar och öppen spis.",
+   pools:[],
+   rules:"Inget spa. Bubbelbadkaret finns på rummet.",
+   diaper:"Ej aktuellt", rooms:"Två minisviter med bubbelbadkar, öppen spis och uteplats. Några sviter har också bubbelbad.",
+   priceNote:"Minisvit med bubbelbad från 1 526 kr (ej återbetalningsbar) eller 1 695 kr. Svit med bubbelbad från 1 886 kr eller 2 095 kr. Båda rummen tar max 2 vuxna och 2 barn. Spjälsäng 275 kr/natt.",
+   note:"Ett billigt sätt att få varmt vatten för bebisen. Ni fyller badkaret själva till rätt temperatur.",
+   sources:[["Rummen och tillägg","https://tallbergsgarden.se/rummen/"],["Priser per rumstyp (Hotelspecials)","https://www.hotelspecials.se/taellbergsgarden-hotell"],["Halvpensionspaket","https://tallbergsgarden.se/halvpensionspaket-1-dygn/"],["Dalarnas White Guide-restauranger","https://www.mynewsdesk.com/se/visit-dalarna-ab/blog_posts/haer-finns-dalarnas-white-guide-restauranger-102201"],["Booking-betyg (via hotellmedbubbelpool.com)","https://hotellmedbubbelpool.com/hotell-jacuzzi-rummet-dalarna"]]},
+
+  {id:"akerblads", rating:{v:"9,0",n:"169 omdömen",src:"Hotelspecials"}, rating2:"Booking/Trip.com 8,9 (2 058 omdömen)", food:"Frukostpaketet ger frukost och spaentré. Middagspaketet ger 3-rättersmiddag, frukost och spa från 1 645 kr/person, sön–fre. Det billigaste rummet ingår i det priset, så minisvit med bubbelbad kostar mer. Lovpaket för 2 vuxna och 2 barn med 2-rättersmiddag, barnrätt, frukost och spa: från 3 045 kr/rum och natt på höstlovet 2026 (sön–tors, v.43–44) och 3 295 kr på påsklovet 2027. Paket med barn bokas på telefon 0247-508 00.", halfboard:3290, hbNote:"billigaste rummet, sön–fre, spa ingår", kind:"hotel", name:"Åkerblads Gästgiveri & Spa", place:"Tällberg", region:"Dalarna", drive:180, score:88,
+   baby:"ja", warm:"okänd", tub:"ja",
+   price:{min:1824, max:2165, unit:"minisvit med bubbelbadkar, frukost och spa ingår"},
+   pick:"Spa för barn 0–14 år och minisviter med bubbelbad.",
+   pools:[["Utomhuskälla (\"rykande varm\")",null],["Hydromassagepool, varmare vatten",null],["Inomhuspool",null]],
+   rules:"Barn 0–14 år i pooler och spa-lounge kl 9–16 med målsman. Efter 16 gäller 15-årsgräns.",
+   diaper:"Okänd", rooms:"Minisviter och sviter med bubbelbad. Privat spasvit med bubbelpool kan bokas.",
+   priceNote:"Minisvit med bubbelbadkar i Gårdshuset från 1 824 kr (Upgrade Special) eller 2 065 kr, i huvudbyggnaden från 2 165 kr. Max 2 vuxna, så fråga om spjälsäng. Barn 0–2 år 150 kr/natt.",
+   note:"Det enda stället med både spa för bebisar och bubbelbad på rummet. Temperaturerna i spat står inte på sajten.",
+   sources:[["Barn på Åkerblads","https://akerblads.se/hotell/barn-pa-akerblads/"],["Spa","https://akerblads.se/spa/"],["Priser per rumstyp (Hotelspecials)","https://www.hotelspecials.se/akerblads-gastgiveri-hotell-och-spa"],["Middagspaket","https://akerblads.se/paket/halvpension/"],["Lovpaket","https://akerblads.se/paket/lovpaket/"],["Frukostpaket","https://akerblads.se/paket/frukostpaketet/"]]},
+
+  {id:"havsbaden", kind:"hotel", name:"Hotell Havsbaden", place:"Grisslehamn", region:"Roslagen", drive:75, score:84,
+   baby:"ja", warm:"okänd", tub:"nej",
+   price:{min:2100, max:null, unit:"logi med frukost"},
+   pick:"Spa för barn från 0 år, med lågvattenbassäng.",
+   pools:[["Lågvattenbassäng",null],["Bubbelbadkar",null],["Utomhuspool",null]],
+   rules:"Barn 0–15 år i spat kl 13–17 varje dag.",
+   diaper:"Okänd", rooms:"Minisvit med badkar (+500 kr). Tornsviten med spabad är bortsorterad på grund av priset.",
+   priceNote:"Spjälsäng 250 kr. Dagspa för barn 0–4 år 195 kr.",
+   contact:"0175-309 30",
+   note:"Närmast Stockholm. Skriver uttryckligen 0 år, men inga temperaturer anges.",
+   sources:[["Spa, barnregler och priser","https://hotellhavsbaden.se/spa"]]},
+
+  {id:"mora", kind:"cabin", name:"Stuga 20 m från Siljan med jacuzzi", place:"Mora", region:"Dalarna", drive:225, score:82,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:2980, max:3130, unit:"hela stugan"},
+   pick:"Barnvänlig stuga för 4 med egen jacuzzi vid Siljan.",
+   pools:[], rules:"Egen jacuzzi.", diaper:"Ej aktuellt",
+   rooms:"4 gäster, 2 sovrum. Värden beskriver stugan som lugn och barnvänlig. Betyg 4,9 (63 omdömen).",
+   note:"Jacuzzin står troligen ute. Fråga om temperaturen går att ställa in.",
+   sources:[["Airbnb 43592896","https://www.airbnb.com/rooms/43592896"]]},
+
+  {id:"hogbo", kind:"cabin", name:"Högbostugan", place:"Högbo, Sandviken", region:"Gästrikland", drive:120, score:80,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:1190, max:1200, unit:"hela gästhuset"},
+   pick:"Billigast med egen jacuzzi, 2 h från Stockholm.",
+   pools:[], rules:"Privat jacuzzi året runt, vissa tider.", diaper:"Ej aktuellt",
+   rooms:"Gästhus med 1 sovrum, 500 m från Högbo Bruk. Betyg 4,85 (61 omdömen).",
+   note:"Jacuzzin har bestämda öppettider. Fråga om temperatur och spjälsäng.",
+   sources:[["Airbnb 973831769597989156","https://www.airbnb.com/rooms/973831769597989156"]]},
+
+  {id:"klockargarden", rating:{v:"8,2",n:"1 079 omdömen",src:"Booking"}, rating2:"Hotelspecials 9,3 (frukost 9,6)", food:"Frukost ingår. Middagspaket med 3-rättersmiddag i Gemak med bubbelbad: från 3 150 kr för två. Traditionell mat på lokala råvaror, och tunnbröd bakas i bagarstugan från 1816. Med Relaxpaketet får ni tillgång till inomhuspool och bastu på systerhotellet Gyllene Hornet, 300 m bort. Pooltemperaturen är okänd.", halfboard:3150, hbNote:"Gemak med bubbelbad", kind:"hotel", name:"Hotell Klockargården", place:"Tällberg", region:"Dalarna", drive:180, score:78,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:2000, max:null, unit:"\"Gemak med bubbelbad\", frukost ingår"},
+   pools:[], rules:"Inget spa för bebisar. Bubbelbadet finns på rummet.", diaper:"Ej aktuellt",
+   rooms:"Rumstypen heter \"Gemak med bubbelbad\". Den tar max 2 vuxna och 1 barn. Det billigaste vanliga dubbelrummet kostar från 1 300 kr men har inget bubbelbad.",
+   note:"Timmerhus från 1937, 1 km till Siljan.",
+   sources:[["Priser och paket per rumstyp (Hotelspecials)","https://www.hotelspecials.se/hotel-klockargarden"],["Booking-betyg och rumsinfo","https://hotellmedbubbelpool.com/hotell-jacuzzi-rummet-dalarna"]]},
+
+  {id:"rattvik-spa", rating:{v:"4,77/5",n:"241 omdömen",src:"Airbnb"}, food:"Ingen mat ingår, men stugan har eget kök. White Guide-restauranger i närheten: Johanssons på Tällbergsgården samt Bruntegården och Sjövillan i Rättvik.", kind:"cabin", name:"SPA-stuga vid sjö med badtunna", place:"Rättvik", region:"Dalarna", drive:195, score:72,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:1650, max:2180, unit:"hela stugan"},
+   pools:[], rules:"Egen vedeldad badtunna och bastu.", diaper:"Ej aktuellt",
+   rooms:"2 sovrum, 4 bäddar, spjälsäng finns. Roddbåt ingår. Betyg 4,77 (241 omdömen).",
+   note:"Badtunnan är vedeldad, så temperaturen är svår att styra. Troligen samma värd som de två Stugnet-stugorna i Rättvik.",
+   sources:[["Airbnb 10953297","https://www.airbnb.com/rooms/10953297"]]},
+
+  {id:"milla", kind:"cabin", name:"Millas stugby", place:"Högbo, Sandviken", region:"Gästrikland", drive:120, score:70,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:1200, max:null, unit:"stugan, jacuzzi mot avgift"},
+   pools:[], rules:"Jacuzzi och vedeldad bastu hos värden mot en mindre avgift.", diaper:"Ej aktuellt",
+   rooms:"5 gäster, 3 sovrum, spjälsäng finns. Betyg 4,97 (35 omdömen).",
+   note:"Jacuzzin står på värdens tomt. Fråga om ni får ha den för er själva.",
+   sources:[["Airbnb 1660143707544816976","https://www.airbnb.com/rooms/1660143707544816976"]]},
+
+  {id:"on", kind:"cabin", name:"Villa Ön med jacuzzi", place:"Ön, nära Svärdsjö", region:"Dalarna", drive:165, score:68,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:2810, max:2950, unit:"hela villan"},
+   pools:[], rules:"Privat jacuzzi för 6 personer med sjöutsikt.", diaper:"Ej aktuellt",
+   rooms:"6 gäster, 3 sovrum. Betyg 4,99 (75 omdömen).",
+   note:"Jacuzzin står ute, och enligt annonsen saknar den grind och lås.",
+   sources:[["Airbnb 788716740829758853","https://www.airbnb.com/rooms/788716740829758853"]]},
+
+  {id:"citygavle", kind:"hotel", name:"Best Western Hotell City", place:"Gävle centrum", region:"Gästrikland", drive:120, score:66,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:2004, max:2447, unit:"juniorsvit med bubbelpool, frukost ingår"},
+   pools:[], rules:"Inget spa för bebisar. Bubbelbadkar och bastu finns på rummet.", diaper:"Ej aktuellt",
+   rooms:"Juniorsvit med kingsize-säng och bubbelpool, utsikt mot staden. Från 2 004 kr (förskottsbetalt), 2 358 kr eller 2 447 kr beroende på avbokningsvillkor.",
+   note:"Fråga om spjälsäng får plats.",
+   sources:[["Priser per rumstyp (Hotelspecials)","https://www.hotelspecials.se/best-western-hotel-city-gavle"],["Hotellets rum","https://hotelcity.nu/hotell-rum-gavle/deluxe-superior-rum"]]},
+
+  {id:"magasin4", kind:"hotel", name:"Magasin 4", place:"Gävle, Norra Skeppsbron", region:"Gästrikland", drive:120, score:66,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:null, unit:"okänt för lägenheten med bubbelbad (billigaste lägenheten ca 1 290 kr)"},
+   pools:[], rules:"Lägenhet med hörnbadkar med bubbel.", diaper:"Ej aktuellt",
+   rooms:"Fyra lägenheter på 45–65 m² för 2–3 personer, med kök och havsutsikt.",
+   note:"Eget kök, vilket är praktiskt med bebis. Ingen bokningssajt anger vilken lägenhet som har bubbelbadkaret eller vad den kostar, så ring och fråga.",
+   sources:[["Bubbelbadkar","https://hotellmedbubbelpool.com/hotell-jacuzzi-rummet-gavle"],["Priser (Booked)","https://magasin-4-gavle.booked.se/"]]},
+
+  {id:"lerdal", rating:{v:"8,6",n:"1 208 omdömen",src:"Booking"}, food:"Frukost ingår och får beröm i omdömena. À la carte-restaurang med sjöutsikt och traditionell mat på lokala råvaror. Två White Guide-restauranger ligger nära i Rättvik: Bruntegården på Lerdalsberget och Sjövillan vid Långbryggan.", kind:"hotel", name:"Hotell Lerdalshöjden", place:"Rättvik", region:"Dalarna", drive:195, score:64,
+   baby:"oklart", warm:"okänd", tub:"ja",
+   price:{min:2271, max:2391, unit:"svit med bubbelpool och sjöutsikt, frukost ingår"},
+   pools:[["Bubbelpool i hotellet",null]],
+   rules:"Okänt om barn får använda hotellets bubbelpool.", diaper:"Okänd",
+   rooms:"Svit med kingsize-säng, bubbelpool och sjöutsikt, från 2 271 kr (förskottsbetalt) eller 2 391 kr. Det finns en likadan svit med bastu i stället för bubbelpool, så välj rätt vid bokning.",
+   note:"Max 2 vuxna i sviten, så fråga om spjälsäng.",
+   sources:[["Priser per rumstyp (Hotelspecials)","https://www.hotelspecials.se/best-western-hotell-lerdalshojden"],["Best Western","https://www.bestwestern.se/hotell/best-western-hotell-lerdalshoejden-88199"],["Restaurangen (Visit Dalarna)","https://visitdalarna.se/en/stays/hotel/1967414/hotell-lerdalshojden"],["White Guide i Dalarna","https://www.mynewsdesk.com/se/visit-dalarna-ab/blog_posts/haer-finns-dalarnas-white-guide-restauranger-102201"]]},
+
+  {id:"stugnet-26109", food:"Ingen mat ingår, men stugan har eget kök. White Guide-restauranger i närheten: Johanssons på Tällbergsgården samt Bruntegården och Sjövillan i Rättvik.", kind:"cabin", name:"Timrad sjöstuga med badtunna", place:"Rättvik", region:"Dalarna", drive:195, score:60,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:1700, max:null, unit:"hela stugan"},
+   pools:[], rules:"Vedeldad badtunna och bastu efter överenskommelse.", diaper:"Ej aktuellt",
+   rooms:"25 m², 2 bäddar, 20 m från sjön. 9 900 kr/vecka.",
+   note:"Liten för två vuxna, en bebis och en spjälsäng. Badtunnan är vedeldad.",
+   sources:[["Stugnet 26109","https://www.stugnet.se/objekt.asp?id=26109"]]},
+
+  {id:"stugnet-26107", food:"Ingen mat ingår, men stugan har eget kök. White Guide-restauranger i närheten: Johanssons på Tällbergsgården samt Bruntegården och Sjövillan i Rättvik.", kind:"cabin", name:"Strandstuga med badtunna", place:"Rättvik", region:"Dalarna", drive:195, score:58,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:2200, max:null, unit:"hela stugan"},
+   pools:[], rules:"Vedeldad badtunna direkt vid stranden.", diaper:"Ej aktuellt",
+   rooms:"23 m², 2 bäddar. Roddbåt och kanot ingår. 11 500 kr/vecka.",
+   note:"Mycket liten. Samma värd som stugan ovan.",
+   sources:[["Stugnet 26107","https://www.stugnet.se/objekt.asp?id=26107"]]},
+
+  {id:"tallberg-villa", rating:{v:"5,0/5",n:"11 omdömen",src:"Airbnb"}, food:"Ingen mat ingår, men stugan har eget kök. White Guide-restauranger i närheten: Johanssons på Tällbergsgården samt Bruntegården och Sjövillan i Rättvik.", kind:"cabin", name:"Lakefront Villa med jacuzzi", place:"Tällberg", region:"Dalarna", drive:180, score:56,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:null, unit:"inte bokbar på testade datum"},
+   pools:[], rules:"Privat jacuzzi på terrassen, direkt vid Siljan.", diaper:"Ej aktuellt",
+   rooms:"6 gäster, 3 sovrum, bastu. Betyg 5,0 (11 omdömen).",
+   note:"Inget pris visades för helgerna i nov 2026–jan 2027. Kolla på Airbnb med era datum.",
+   sources:[["Airbnb 1473076603369744439","https://www.airbnb.com/rooms/1473076603369744439"]]},
+
+  {id:"viksjo", kind:"cabin", name:"Lyxstuga i skogen med jacuzzi", place:"Viksjöfors", region:"Hälsingland", drive:225, score:54,
+   baby:"ja", warm:null, tub:"ja",
+   price:{min:3170, max:3750, unit:"hela stugan"},
+   pools:[], rules:"Privat jacuzzi året runt på altanen.", diaper:"Ej aktuellt",
+   rooms:"1 sovrum, gjord för två, spjälsäng finns. Betyg 4,98 (84 omdömen).",
+   note:"Avskild stuga 10 km in i skogen, strax norr om Gästrikland.",
+   sources:[["Airbnb 8940423","https://www.airbnb.com/rooms/8940423"]]},
+
+  {id:"experium", kind:"hotel", name:"SkiStar Lodge + Experium", place:"Lindvallen, Sälen", region:"Dalarna", drive:300, score:52,
+   baby:"ja", warm:"ja", tub:"okänd",
+   price:{min:null, unit:"lägenheter för 4–8, pris på skistar.com"},
+   pools:[["Utomhuspool",37],["Småbarnspooler 10–80 cm djup",null],["Bubbelpooler",null]],
+   rules:"Äventyrsbad för alla åldrar. Förboka entré.",
+   diaper:"Okänd", rooms:"SkiStar Lodge ligger vägg i vägg med Experium.",
+   priceNote:"Öppet tor–sön fram till 20 dec, sedan alla dagar 9–19.30.",
+   note:"Den varmaste poolen är en utomhuspool, vilket är mindre bra med bebis i fjällvinter. Långt att köra.",
+   sources:[["Äventyrsbad (37 °C)","https://www.skistar.com/sv/experium/aventyrsbad-surf/"],["SkiStar Lodge","https://www.skistar.com/en/lodging/hotel-lodge/skistar-lodge-lindvallen/"]]},
+
+  {id:"dalecarlia", rating:{v:"8,1",n:"1 292 omdömen",src:"Booking"}, food:"Frukost ingår. Restaurang med svensk och internationell mat, pianobar och poolbar i spat.", kind:"hotel", name:"Dalecarlia Hotel & Spa", place:"Tällberg", region:"Dalarna", drive:180, score:50,
+   baby:"oklart", warm:"okänd", tub:"nej",
+   price:{min:950, max:1310, unit:"dubbelrum, spa extra"},
+   pools:[["Stilla varm källa ute",null],["Två bubbelpooler",null],["Twinmassagepool ute",null],["Swimmingpool inne",null]],
+   rules:"Familjetider: barn under 12 år mån–fre 10–13, lör–sön 9–12. Ingen lägsta ålder anges.",
+   diaper:"Okänd", rooms:"Jacuzzisviten är inte lämplig för barn på grund av en brant trappa.",
+   priceNote:"Extra spadag 150 kr/vuxen.", contact:"Spa: 0247-893 86",
+   note:"Det finns många varma pooler, men inga temperaturer anges.",
+   sources:[["Spa","https://www.dalecarlia.se/spa/"],["Öppettider","https://www.dalecarlia.se/spa-oppettider/"],["Sviten och trappan","https://hotellmedbubbelpool.com/hotell-jacuzzi-rummet-dalarna"]]},
+
+  {id:"farna", kind:"hotel", name:"Färna Herrgård & Spa", place:"Skinnskatteberg", region:"Västmanland", drive:120, score:44,
+   baby:"oklart", warm:"okänd", tub:"nej",
+   price:{min:2270, max:2800, unit:"dubbelrum"},
+   pools:[["Inomhuspool",null],["Utomhuspool",null]],
+   rules:"Barntid tis–sön 9–11.30 för barn under 13 år. Annars 13-årsgräns.",
+   diaper:"Okänd", rooms:"Spasviten renoveras.",
+   note:"Kort barntid och inga temperaturer.",
+   sources:[["Barn på spa","https://farnaherrgard.se/behandlingar/barn-pa-spa/"]]},
+
+  {id:"winn", kind:"hotel", name:"Clarion Hotel Winn", place:"Gävle centrum", region:"Gästrikland", drive:120, score:42,
+   baby:"ja", warm:"okänd", tub:"okänd",
+   price:{min:1010, max:1170, unit:"dubbelrum, pool ingår"},
+   pools:[["Relaxpool 8 × 4 m",null]],
+   rules:"Pool och bastu kl 7–22. Från kl 20 gäller 15-årsgräns.",
+   diaper:"Okänd", rooms:"Okänt.",
+   note:"En hotellpool, inget riktigt spa. Den är bara bra för bebisen om vattnet är ovanligt varmt.",
+   sources:[["Visit Gävle","https://www.visitgavle.se/en/relax-pool-and-sauna-clarion-winn"]]},
+
+  {id:"jarvso", kind:"hotel", name:"Järvsöbaden", place:"Järvsö", region:"Hälsingland", drive:225, score:40,
+   baby:"ja", warm:"okänd", tub:"okänd",
+   price:{min:910, max:null, unit:"dubbelrum, spaentré 95 kr/pers"},
+   pools:[["Jacuzzi",null],["Utomhuspool",null],["Kallbad",6]],
+   rules:"Barn får vara i spat med målsman kl 10–21.", diaper:"Okänd", rooms:"Okänt.",
+   contact:"0651-40 400",
+   note:"Litet spa, och det enda varma vattnet är en jacuzzi.",
+   sources:[["Spa","https://www.jarvsobaden.se/spa/"]]},
+
+  {id:"steam", kind:"hotel", name:"Steam Hotel + Kokpunkten", place:"Västerås", region:"Västmanland", drive:75, score:36,
+   baby:"oklart", warm:"okänd", tub:"okänd",
+   price:{min:750, max:null, unit:"dubbelrum, actionbad extra"},
+   pools:[["Kokpunkten: bubbelpooler m.m.",null],["Steam Pool Club (18+ på kvällen)",null]],
+   rules:"Kokpunkten är för alla åldrar. Hotellets Pool Club har 18-årsgräns kl 20–22.30.",
+   diaper:"Okänd", rooms:"Okänt.", contact:"Kokpunkten: 021-448 55 00",
+   note:"Kokpunkten ligger 300 m bort och är ett actionbad för större barn. Det är oklart om det finns en riktigt varm pool.",
+   sources:[["Kokpunkten","https://www.kokpunkten.se/"],["Steam Hotel","https://www.steamhotel.se/"]]},
+
+  {id:"lugnet", kind:"hotel", name:"Lugnets badhus + Scandic Lugnet", place:"Falun", region:"Dalarna", drive:165, score:30,
+   baby:"ja", warm:"ja", tub:"nej",
+   price:{min:690, max:null, unit:"hotell, badhusentré extra"},
+   pools:[["Rehabbassäng",34],["Undervisning/babysim",33],["Barnbassäng",32],["Aktivitetsbassäng",30]],
+   rules:"Kommunalt badhus. Rehab- och babysimbassängen kan vara bokade för kurser.",
+   diaper:"Badblöja krävs normalt", rooms:"Hotellet ligger ca 15 min promenad från badhuset.",
+   note:"Bra temperaturer, men boendet ligger inte på samma plats.",
+   sources:[["Badhuset (temperaturer)","https://www.lugnet.se/aktiviteter/bad/badhuset/om-badhuset/information-pa-flera-sprak/english.html"],["Scandic Lugnet","https://visitdalarna.se/en/accommodation/facility/scandic-lugnet"]]}
+];
+
+const EXCLUDED = [
+  ["Hotell Strandvillan","Orsa","Hotellets egen rumslista visar 12 rum med dusch och inget bubbelbad. Uppgiften om spabadkar verkar vara inaktuell.","https://www.strandvillan.se/rum/"],
+  ["Havsbaden: tornsvit med spabad","Grisslehamn","Minst ca 5 100 kr/natt (2 100 kr logi + 3 000 kr tillägg). Spabadet står på taket.","https://hotellhavsbaden.se/hotell"],
+  ["Hus 5 km från Falun med jacuzzi","Falun","5 250–6 350 kr/natt och 8 bäddar.","https://www.airbnb.com/rooms/30151968"],
+  ["Sjövilla med jacuzzi","10 min från Gävle","Villa på 200 m² för 8 personer.","https://www.airbnb.com/rooms/1184604135564668677"],
+  ["Åretruntidyll vid Siljan","Tällberg","150 m² för 6–8 personer, från 4 000 kr/dygn.","https://www.stugbasen.com/stuga/93058"],
+  ["Fjällstuga i Idre, stuga i Stöten","Idre, Sälen","Hus för 8–11 personer, 5 h bort.","https://www.stugknuten.com/sv/stuga/33021"],
+  ["Skärgårdshus på Blidö (två st), villa på Gräddö","Stockholms skärgård","Hus för 8 personer. Ena jacuzzin håller 38–40 °C.","https://www.stugknuten.com/sv/stuga/36143"],
+  ["Fågelbro Säteri","Värmdö","Spa bara för barn 4–15 år.","https://www.fagelbrosateri.se/en/spa/kids-at-the-spa/"],
+  ["Högbo Brukshotell","Sandviken","Spa för barn från 3 år.","https://www.hogbobrukshotell.se/spa"],
+  ["Smådalarö Gård","Dalarö","Spa för barn från 6 år.","https://www.smadalarogard.se/en/spa/day-spa/children-at-spa/"],
+  ["Nynäs Havsbad","Nynäshamn","15-årsgräns i spat.","https://www.nynashavsbad.se/sv/spa-bad"],
+  ["Gimo Herrgård","Gimo","Spa från 15 år.","https://travelocity.ca/Gimo-Hotels-Gimo-Herrgard.h8264189.Hotel-Information"],
+  ["Skepparholmen","Nacka","Barn 10–16 år bara vissa lovdagar.","https://familjeparker.se/aventyrsbad/sveriges-30-basta-spa-for-familjer/"],
+  ["Yasuragi","Hasseludden","16-årsgräns, utom under Yasuragi Kids 1–11 augusti.","https://www.svenskaspahotell.se/om-oss/barnvanligt-pa-spa/"]
+];
+
+/* ===== RENDERING ===== */
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const kr=n=>n.toLocaleString("sv-SE").replace(/ /g," ");
+const hm=m=>{const h=Math.floor(m/60),r=m%60;return "ca "+h+" h"+(r?" "+r+" min":"")};
+const inBand=t=>t!=null&&t>=33&&t<=37;
+
+function priceText(p){
+  if(p.min==null) return "Pris okänt";
+  if(p.max && p.max!==p.min) return kr(p.min)+"–"+kr(p.max)+" kr";
+  return (p.max==null?"från ":"")+kr(p.min)+" kr";
+}
+function feats(it){
+  const out=[];
+  const isSpa=it.warm!==null;
+  if(isSpa){
+    out.push(it.baby==="ja"?["ok","Bebis i spat"]:it.baby==="oklart"?["maybe","Bebis i spat: oklart"]:["no","Ingen bebis i spat"]);
+    out.push(it.warm==="ja"?["ok","33–37 °C"]:it.warm==="nej"?["no","För kallt"]:["maybe","Temp okänd"]);
+  }
+  out.push(it.tub==="ja"?["ok",it.kind==="cabin"?"Egen bubbelpool":"Bubbelbad på rummet"]:it.tub==="okänd"?["off","Bubbelbad på rum: okänt"]:["off","Inget bubbelbad på rummet"]);
+  return out.map(([c,t])=>'<span class="f '+c+'">'+esc(t)+'</span>').join("");
+}
+function row(it){
+  const over=it.price.min!=null&&it.price.min>BUDGET, unk=it.price.min==null;
+  const dl=[["Restid",hm(it.drive)],["Betyg",it.rating?it.rating.v+" på "+it.rating.src+" ("+it.rating.n+")"+(it.rating2?". "+it.rating2:""):null],["Mat",it.food],["Barnregler",it.rules],["Badblöja",it.diaper],[it.kind==="cabin"?"Stugan":"Rum",it.rooms],["Pris",it.priceNote],["Telefon",it.contact]]
+    .filter(([,v])=>v).map(([k,v])=>'<dt>'+k+'</dt><dd>'+esc(v)+'</dd>').join("");
+  const pools=it.pools.length?'<div class="pools"><span class="eyebrow">Pooler</span><ul>'+it.pools.map(([n,t])=>'<li class="'+(inBand(t)?"hot":"")+'"><span>'+esc(n)+'</span><span class="t">'+(t!=null?t+" °C":"okänd")+'</span></li>').join("")+'</ul></div>':'<div></div>';
+  return '<details class="row" id="'+it.id+'"><summary>'+
+    '<div class="name"><h3>'+esc(it.name)+(it.rating?' <span class="rate">'+esc(it.rating.v)+' <small>'+esc(it.rating.src)+'</small></span>':'')+'</h3><span class="sub"><span class="tag">'+(it.kind==="cabin"?"Stuga":"Hotell")+'</span>'+esc(it.place)+' · '+esc(it.region)+' · '+hm(it.drive)+'</span></div>'+
+    '<div class="feats">'+feats(it)+'</div>'+
+    '<div class="price'+(over?" over":"")+(unk?" unknown":"")+'"><span class="v">'+priceText(it.price)+'</span><span class="u">'+(unk?"":"per natt · ")+esc(it.price.unit)+(over?" · över 4 500":"")+'</span></div>'+
+  '</summary><div class="detail"><p class="note">'+esc(it.note)+'</p><dl>'+dl+'</dl>'+pools+
+    '<div class="src"><span>Källor:</span>'+it.sources.map(([l,u])=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(l)+'</a>').join("")+'</div></div></details>';
+}
+
+const TR=it=>/Tällberg|Rättvik/.test(it.place);
+const REGIONS=[["Dalarna","Dalarna"],["Gästrikland","Gästrikland / kring Gävle"],["Hälsingland","Hälsingland"],["Västmanland","Västmanland"],["Roslagen","Stockholm & Roslagen"]];
+const state={type:"all",tub:false,warm:false,budget:false,sort:"match",regions:new Set()};
+document.getElementById("regions").innerHTML='<button class="rchip" data-r="" aria-pressed="true">Alla</button><button class="rchip" data-r="tr" aria-pressed="false">Tällberg + Rättvik<span class="n">'+ITEMS.filter(TR).length+'</span></button><button class="rchip" data-r="near" aria-pressed="false">Dalarna + kring Gävle</button>'+REGIONS.map(([k,l])=>'<button class="rchip" data-r="'+k+'" aria-pressed="false">'+l+'<span class="n">'+ITEMS.filter(i=>i.region===k).length+'</span></button>').join("");
+document.getElementById("regions").addEventListener("click",e=>{
+  const b=e.target.closest(".rchip"); if(!b) return; const r=b.dataset.r;
+  if(r==="tr"){ const on=state.regions.has("tr"); state.regions=on?new Set():new Set(["tr"]); syncRegions(); render(); return; }
+  state.regions.delete("tr");
+  if(r==="") state.regions.clear();
+  else if(r==="near"){ const on=state.regions.size===2&&state.regions.has("Dalarna")&&state.regions.has("Gästrikland"); state.regions=on?new Set():new Set(["Dalarna","Gästrikland"]); }
+  else state.regions.has(r)?state.regions.delete(r):state.regions.add(r);
+  syncRegions(); render();
+});
+function syncRegions(){
+  const near=state.regions.size===2&&state.regions.has("Dalarna")&&state.regions.has("Gästrikland");
+  document.querySelectorAll(".rchip").forEach(b=>{const r=b.dataset.r;b.setAttribute("aria-pressed",r===""?state.regions.size===0:r==="near"?near:state.regions.has(r))});
+}
+function render(){
+  let items=ITEMS.filter(it=>(state.regions.size===0||(state.regions.has("tr")?TR(it):state.regions.has(it.region)))&&(state.type==="all"||it.kind===state.type)&&(!state.tub||it.tub==="ja")&&(!state.warm||it.warm==="ja")&&(!state.budget||(it.price.min!=null&&it.price.min<=BUDGET)));
+  const cmp={match:(a,b)=>b.score-a.score,price:(a,b)=>(a.price.min??1e9)-(b.price.min??1e9),drive:(a,b)=>a.drive-b.drive}[state.sort];
+  items.sort(cmp);
+  const head='<div class="colhead"><span>Boende</span><span>Det som spelar roll</span><span>Pris per natt</span></div>';
+  document.getElementById("list").innerHTML=head+(items.length?items.map(row).join(""):'<div class="empty">Inget matchar alla val. Ta bort ett filter.</div>');
+  document.getElementById("count").textContent=items.length+" av "+ITEMS.length;
+}
+const typeBtns={all:"t-all",hotel:"t-hotel",cabin:"t-cabin"};
+Object.entries(typeBtns).forEach(([k,id])=>document.getElementById(id).addEventListener("click",()=>{state.type=k;Object.entries(typeBtns).forEach(([kk,ii])=>document.getElementById(ii).setAttribute("aria-pressed",kk===k));render()}));
+["tub","warm","budget"].forEach(k=>document.getElementById("f-"+k).addEventListener("change",e=>{state[k]=e.target.checked;render()}));
+document.getElementById("sort").addEventListener("change",e=>{state.sort=e.target.value;render()});
+
+document.getElementById("picks").innerHTML=ITEMS.filter(i=>i.pick).sort((a,b)=>b.score-a.score).slice(0,4).map(it=>
+  '<a class="pick" href="#'+it.id+'" data-id="'+it.id+'"><span class="eyebrow">'+esc(it.place)+' · '+hm(it.drive)+'</span><h3>'+esc(it.name)+'</h3><span class="why">'+esc(it.pick)+'</span><span class="p">'+priceText(it.price)+'<small>/natt</small></span></a>').join("");
+document.getElementById("picks").addEventListener("click",e=>{const a=e.target.closest(".pick");if(!a)return;const d=document.getElementById(a.dataset.id);if(d)d.open=true});
+
+document.getElementById("excluded").innerHTML=EXCLUDED.map(([n,p,w,u])=>'<tr><td><strong>'+esc(n)+'</strong></td><td>'+esc(p)+'</td><td>'+esc(w)+'</td><td><a href="'+esc(u)+'" target="_blank" rel="noopener">Källa</a></td></tr>').join("");
+document.getElementById("updated").textContent=UPDATED;
+document.getElementById("focus").innerHTML=ITEMS.filter(it=>TR(it)&&it.tub==="ja").sort((a,b)=>(a.price.min??1e9)-(b.price.min??1e9)).map(it=>{
+  const babySpa=it.warm===null?"Inget spa":it.baby==="ja"?"Ja":it.baby==="oklart"?"Oklart":"Nej";
+  return '<tr><td><a href="#'+it.id+'" data-id="'+it.id+'"><strong>'+esc(it.name)+'</strong></a><small>'+esc(it.place)+' · '+(it.kind==="cabin"?"stuga, eget kök":esc(it.price.unit))+'</small></td>'+
+  '<td class="num">'+priceText(it.price)+(it.kind==="cabin"?'<small>hela stugan, ingen mat</small>':"")+'</td>'+
+  '<td class="num">'+(it.halfboard?"från "+kr(it.halfboard)+" kr"+(it.hbNote?'<small>'+esc(it.hbNote)+'</small>':""):"–")+'</td>'+
+  '<td>'+(it.rating?esc(it.rating.v)+'<small>'+esc(it.rating.src)+', '+esc(it.rating.n)+'</small>':"–")+'</td><td>'+babySpa+'</td></tr>';
+}).join("");
+document.getElementById("focus").addEventListener("click",e=>{const a=e.target.closest("a[data-id]");if(!a)return;const d=document.getElementById(a.dataset.id);if(d)d.open=true});
+render();
+</script>
